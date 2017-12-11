@@ -1,21 +1,14 @@
 package cloud.network.controller;
 
-import cloud.network.model.ApiVersion;
-import cloud.network.service.netinterface.NetInterfaceService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,7 +24,7 @@ public class NetInterfaceControllerTest { //extends WebSecurityConfigurerAdapter
     private MockMvc mockMvc;
 
     @Before
-    public void setup(){
+    public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
 

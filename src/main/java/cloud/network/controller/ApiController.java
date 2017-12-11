@@ -26,8 +26,7 @@ public class ApiController {
     public ResponseEntity getApiVersion() {
         try {
             return new ResponseEntity<>(new ApiVersion(apiService.getVersion()), HttpStatus.OK);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             LOG.error("getApiVersion() error: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiError("error"));
         }
