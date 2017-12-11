@@ -2,7 +2,7 @@
 
 [![Travis](https://travis-ci.org/0xFaulty/NetworkService.svg?branch=master)](https://travis-ci.org/0xFaulty/NetworkService)
 
-RESTful сервис, который реализуется API для работы с сетевыми интерфейсами.
+RESTful сервис, который реализует API для работы с сетевыми интерфейсами.
 
 **Api**
 - /service/version
