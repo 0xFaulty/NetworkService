@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cloud.network.server</groupId>
+    <artifactId>server</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <name>server</name>
+    <description>Network Service Server</description>
+
+    <parent>
+        <groupId>cloud.network</groupId>
+        <artifactId>network</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.0.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <properties>
+        <spring-data-jpa.version>1.8.2.RELEASE</spring-data-jpa.version>
+        <lombok.version>1.16.18</lombok.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jolokia</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.13.4</version>
+                <configuration>
+                    <dockerHost>tcp://192.168.1.9:2376</dockerHost>
+                    <certPath>/Users/0xfaulty/.docker/machine/machines/testenv</certPath>
+                    <useColor>true</useColor>
+                    <images>
+                        <image>
+                            <name>socify/AdService:0.1</name>
+                            <alias>service</alias>
+                            <build>
+                                <from>tomcat</from>
+                                <!--<ports>-->
+                                <!--<port>8080</port>-->
+                                <!--</ports>-->
+                                <!--<entryPoint>-->
+                                <!--<exec>-->
+                                <!--<args>catalina.sh</args>-->
+                                <!--<args>start</args>-->
+                                <!--</exec>-->
+                                <!--</entryPoint>-->
+                                <assembly>
+                                    <mode>dir</mode>
+                                    <basedir>/usr/local/tomcat/webapps</basedir>
+                                    <descriptor>assembly.xml</descriptor>
+                                </assembly>
+                            </build>
+                            <run>
+                                <ports>
+                                    <port>8080:8080</port>
+                                </ports>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
